@@ -90,4 +90,13 @@ public class creditList {
         return false;
     }
 
+    @Override
+    public String toString() {
+        String ret = "";
+        for ( int i = 0 ; i < ownersCards.size() ; i ++ )
+        {
+                ret += ownersCards.get(i);
+        }
+        return ret;
+    }
 }

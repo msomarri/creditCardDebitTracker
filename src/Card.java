@@ -9,7 +9,7 @@ public class Card {
     private String name;
     private double apr;
     private double balance;
-    private double paymentPromise;
+    private double paymentPromise = 0 ;
 
     public Card( String name){
         this.name = name;
@@ -55,7 +55,16 @@ public class Card {
     }
     public double monthlyInerest()
     {
-        return getMonthlyApr() * balance;
+        return getMonthlyApr()/100 * balance;
     }
 
+    @Override
+    public String toString() {
+        return "Card{" +
+                "name='" + name + '\'' +
+                ", apr=" + apr +
+                ", balance=" + balance +
+                ", paymentPromise=" + paymentPromise +
+                '}';
+    }
 }
