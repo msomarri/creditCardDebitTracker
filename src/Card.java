@@ -62,11 +62,11 @@ public class Card {
     public double getMonthlyApr(){
         return apr/12.0;
     }
-    public double monthlyInerest()
+    public double monthlyInterest()
     {
         return getMonthlyApr()/100 * balance;
     }
-
+    public double monthlyInterest(double princple , double interest){ return interest/100 * balance;}
     @Override
     public String toString() {
         return "Card{" +

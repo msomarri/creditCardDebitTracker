@@ -12,12 +12,12 @@ public class creditDebitMangement {
     //The total amount of months it would take for a card be payoff with the given amount
     public int payoffCardTime(String name, double amount) {
         Card curr = debit.getCard(name);
+        double interest = curr.getMonthlyApr();
         double balance = curr.getBalance();
         int months = 0;
         while (balance > 0) {
             balance -= amount;
-            balance = balance + curr.monthlyInerest();
-            curr.setBalance(balance);
+            balance = balance + curr.monthlyInterest(balance , interest);
             months++;
 //             System.out.println( " "+balance + "  "+ months);
         }
@@ -69,31 +69,16 @@ public class creditDebitMangement {
             File read = new File(fileName);
             Scanner myReader = new Scanner(read);
             int counter = 1;
-            Card add = new Card();
             creditList newDebit = new creditList();
+            Card add = new Card();
             while (myReader.hasNext()) {
-                String data = myReader.nextLine();
-                switch (counter) {
-                    case 1: {
-                        add.setName(data);
-                        break;
-                    }
-                    case 2: {
-                        add.setBalance(Double.parseDouble(data));
-                        break;
-                    }
-                    case 3: {
-                        add.setApr(Double.parseDouble(data));
-                        newDebit.addNewCard(add);
-                        counter = 0;
-                        break;
-                    }
-                    default: {
-                        System.out.println("Something went wrong");
-                        break;
-                    }
-                }
-                counter++;
+
+                String name = myReader.nextLine();
+                double balance = Double.parseDouble(myReader.nextLine());
+                double apr = Double.parseDouble(myReader.nextLine());
+
+                Card newC = new Card(name,balance, apr);
+                newDebit.addNewCard(newC);
             }
             setDebit(newDebit);
             myReader.close();
@@ -117,32 +102,32 @@ public class creditDebitMangement {
 
     // Testing method TOOD is to add some junit testing
     public static void main(String arg[]) {
-//        String cardNames[] = {"A","B" , "C" , "D" , "E" };
-//        double aprs[] = {1.0,1.2,1.3,22,24.99};
-//        double balances[] = {1111, 1000 , 1232 , 133.21 , 122.33};
-//        int size = 5;
-//
-//        double pay = 54.00;
-//
-//        creditList test = new creditList();
-//        creditDebitMangement test2 = new creditDebitMangement();
-//        for (int i = 0 ; i < size ; i++ )
-//        {
-//            Card temp = new Card( cardNames[i], balances[i],aprs[i] );
-//            test.addNewCard(temp);
-//            test2.setDebit(test);
-//
-//            System.out.println(" Card has been added : "+temp);
-//            System.out.println(" The amount of pay off using "+pay);
-//            System.out.println("Months to payoff " + test2.payoffCardTime(cardNames[i] , pay));
-//        }
-//        test2.writeToText("");
+        String cardNames[] = {"A","B" , "C" , "D" , "E" };
+        double aprs[] = {1.0,1.2,1.3,22,24.99};
+        double balances[] = {1111, 1000 , 1232 , 133.21 , 122.33};
+        int size = 5;
 
-//
-//    }
+        double pay = 54.00;
 
-        creditDebitMangement test = new creditDebitMangement();
-        test.readFile("");
-        System.out.println(test);
+        creditList test = new creditList();
+        creditDebitMangement test2 = new creditDebitMangement();
+        for (int i = 0 ; i < size ; i++ )
+        {
+            Card temp = new Card( cardNames[i], balances[i],aprs[i] );
+            test.addNewCard(temp);
+            test2.setDebit(test);
+
+            System.out.println(" Card has been added : "+temp);
+            System.out.println(" The amount of pay off using "+pay);
+            System.out.println("Months to payoff " + test2.payoffCardTime(cardNames[i] , pay));
+        }
+        test2.writeToText("");
+
+
     }
+
+//        creditDebitMangement test = new creditDebitMangement();
+//        test.readFile("");
+//        System.out.println(test);
+//    }
 }

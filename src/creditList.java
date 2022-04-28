@@ -21,9 +21,12 @@ public class creditList {
     /**
       @addNewCard Add a new card to the list as well as tracking the total balance for all the cards**/
     public void addNewCard(Card newCard){
+        System.out.println(newCard+"\n");
+        System.out.println(ownersCards);
         if( !cardExist(newCard.getName())) {
             ownersCards.add(newCard);
             totalBalance += newCard.getBalance();
+
         }
         else{
             System.out.println("Sorry but you have already added a card with this name");
