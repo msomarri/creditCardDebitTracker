@@ -11,6 +11,11 @@ public class Card {
     private double balance;
     private double paymentPromise = 0 ;
 
+    public Card(){
+        this.name = "";
+        this.balance =0;
+        this.apr = 0;
+    }
     public Card( String name){
         this.name = name;
         this.balance =0;
@@ -30,6 +35,10 @@ public class Card {
     }
 
     // Getter and setter methods
+
+    public void setName(String name) {
+        this.name = name;
+    }
 
     public void setApr(double apr) {
         this.apr = apr;
