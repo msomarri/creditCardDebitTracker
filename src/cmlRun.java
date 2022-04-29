@@ -12,7 +12,7 @@ public class cmlRun {
         //Run untill we are done
         while ( !done)
         {
-            printText( " Welcome to the Credit Card Tracker App \n" +
+            printText( "Welcome to the Credit Card Tracker App \n" +
                     "Here is the Menu\n" +
                     menuItems() );
                     String userInputKey = userInput.nextLine();
@@ -23,6 +23,7 @@ public class cmlRun {
                             break;
                         }
                         case "2":{
+                            seeTotalBalance();
                             break;
                         }
                         case "3":{
@@ -69,7 +70,7 @@ public class cmlRun {
             while (!done) {
                 //Add the name to the card
                 if(!addName) {
-                    printText(" Enter the Name of the Card");
+                    printText("Enter the Name of the Card");
                     answer = userInput.nextLine();
                     if (!confirm(answer)) {
                         continue;
@@ -111,6 +112,7 @@ public class cmlRun {
     }
     public void seeTotalBalance(){
         //Add code to see the total balance
+        printText("Here is your Total Balance So far  "+ownersList.getTotalBalance());
     }
     public void projectPayment(){
         //Add code to see the impact  that a payment will make
