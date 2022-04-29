@@ -5,8 +5,11 @@ import java.io.FileWriter;
 import java.util.Scanner;
 
 public class creditDebitMangement {
-    creditList debit = new creditList();
+    private creditList debit ;
 
+    public  creditDebitMangement(creditList debt){
+        this.debit = debt;
+    }
 
     // Given a card find out how long it will take to payoff that card with a given amount
     //The total amount of months it would take for a card be payoff with the given amount
@@ -110,7 +113,7 @@ public class creditDebitMangement {
         double pay = 54.00;
 
         creditList test = new creditList();
-        creditDebitMangement test2 = new creditDebitMangement();
+        creditDebitMangement test2 = new creditDebitMangement(test);
         for (int i = 0 ; i < size ; i++ )
         {
             Card temp = new Card( cardNames[i], balances[i],aprs[i] );
