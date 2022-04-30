@@ -6,9 +6,9 @@ public class cmlRun {
         app();
     }
     creditList ownersList = new creditList();
+    Scanner userInput = new Scanner(System.in);
     public void app(){
         boolean done = false;
-        Scanner userInput = new Scanner(System.in);
         //Run untill we are done
         while ( !done)
         {
@@ -30,13 +30,25 @@ public class cmlRun {
                             break;
                         }
                         case "4":{
-
+                            totalInterestForTheMonth();
                         }
                         case "5":{
-                            done = true;
+                            writeFile();
+                            break;
+                        }
+                        case "6":
+                        {
+                            readFile();
+                            break;
+                        }
+                        case "7":
+                        {
+                        done = true;
+                        break;
                         }
                         default:{
                             printText("Please Enter a Key");
+                            break;
                         }
                     }
         }
@@ -47,9 +59,11 @@ public class cmlRun {
     {
         return "1: Add New Card +\n" +
                 "2: See total Balance\n" +
-                "3: Project Payment\n" +
+                "3:Payment Impact\n" +
                 "4:Total Interest for the month\n" +
-                "5:Quit";
+                "5:Write to File\n" +
+                "6.Read File\n" +
+                "7:Quit\n";
     }
     /** command line prompt for adding a new card **/
     public void addNewCard() {
@@ -65,7 +79,7 @@ public class cmlRun {
         boolean addBalance = false;
         boolean addAPR = false;
 
-        Scanner userInput = new Scanner(System.in);
+
         try {
             while (!done) {
                 //Add the name to the card
@@ -93,7 +107,7 @@ public class cmlRun {
                     printText("Enter the APR ");
                     answer = userInput.nextLine();
 
-                    if (!confirm("" + apr)) {
+                    if (!confirm("" + answer)) {
                         continue;
                     }
                     apr = Double.parseDouble(answer);
@@ -110,15 +124,33 @@ public class cmlRun {
             printText("Please Enter a number");
         }
     }
+
     public void seeTotalBalance(){
         //Add code to see the total balance
-        printText("Here is your Total Balance So far  "+ownersList.getTotalBalance());
+        printText("Here is your Total Balance So far  "+ ownersList.getTotalBalance());
     }
-    public void projectPayment(){
+    public void paymentImpact(){
         //Add code to see the impact  that a payment will make
     }
     public void totalInterestForTheMonth(){
         //Add code to show what the total interest is for the month
+        creditDebitMangement ret = new creditDebitMangement(ownersList);
+        printText(""+ ret.totalInterest() ) ;
+    }
+    public void writeFile(){
+        printText("Please enter the File/Filepath ");
+        String FilePath = userInput.nextLine();
+        creditDebitMangement ret = new creditDebitMangement(ownersList);
+        ret.writeToText(FilePath);
+        printText("File has been created");
+    }
+    public void readFile(){
+        printText("Please enter the File/Filepath ");
+        String Filepath = userInput.nextLine();
+        creditDebitMangement ret = new creditDebitMangement(ownersList);
+        ret.readFile(Filepath);
+        ownersList = ret.getDebit();
+        printText("File has been Read");
     }
     public void printText(String txt)
     {
@@ -126,7 +158,6 @@ public class cmlRun {
     }
 
     public boolean confirm(String info){
-        Scanner userInput = new Scanner(System.in);
         boolean done = false;
         while(!done) {
             printText(info + " is this correct? Y for YES and N for NO");
@@ -144,7 +175,7 @@ public class cmlRun {
     // Example Program interface using the command line as an interface
     public static void main(String arg[] ){
         cmlRun test = new cmlRun();
-        test.app();
+
 
 
     }
