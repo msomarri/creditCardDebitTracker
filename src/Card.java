@@ -1,6 +1,4 @@
-/** Goal of this project to create an easy way for users to track their credit card debit and
-    pay their balances or see what is the best approach . Card will represent a credit card with information
-    on the apr,current balance , min payment
+/**
     @name The Credit Card name. This name Should be unquie and serves as an id for the card
     @apr The annual percentage rate for the card
     @balance The current Balance of the card
@@ -59,6 +57,7 @@ public class Card {
     public double getBalance() {
         return balance;
     }
+    //Special Info
     public double getMonthlyApr(){
         return apr/12.0;
     }
@@ -69,11 +68,8 @@ public class Card {
     public double monthlyInterest(double princple , double interest){ return interest/100 * balance;}
     @Override
     public String toString() {
-        return "Card{" +
-                "name='" + name + '\'' +
-                ", apr=" + apr +
-                ", balance=" + balance +
-                ", paymentPromise=" + paymentPromise +
-                '}';
+        return  "Name : '" + name + '\n' +
+                "APR: " + apr + "\n" +
+                "Balance: " + balance + "\n";
     }
 }
