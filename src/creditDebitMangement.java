@@ -5,8 +5,11 @@ import java.io.FileWriter;
 import java.util.Scanner;
 
 public class creditDebitMangement {
-    creditList debit = new creditList();
+    private creditList debit ;
 
+    public  creditDebitMangement(creditList debt){
+        this.debit = debt;
+    }
 
     // Given a card find out how long it will take to payoff that card with a given amount
     //The total amount of months it would take for a card be payoff with the given amount
@@ -25,10 +28,19 @@ public class creditDebitMangement {
         return months;
     }
 
+    // Returns the total amount of interest for all the cards toegther
+    public double totalInterest(){
+        double ret = 0;
+        for ( int i = 0 ; i < debit.size() ; i ++ )
+        {
+            ret += debit.getCard(i).monthlyInterest();
+        }
+        return ret;
+    }
     // Writes the current information to a text file
     //Format will be just the info of card written down
     public void writeToText(String path) {
-        String fileName = "debit.txt";
+        String fileName = path+".txt";
         File write = new File(fileName);
 
         //Create the file if it does not exist
@@ -50,9 +62,9 @@ public class creditDebitMangement {
                 Card writeout = debit.getCard(i);
 
                 myWriter.write(writeout.getName() + "\n");
-                myWriter.write("" + writeout.getApr() + "\n");
                 myWriter.write("" + writeout.getBalance() + "\n");
-                ;
+                myWriter.write("" + writeout.getApr() + "\n");
+
 
 
             }
@@ -65,7 +77,7 @@ public class creditDebitMangement {
 
     public void readFile(String path) {
         try {
-            String fileName = "debit.txt";
+            String fileName = path+ ".txt";
             File read = new File(fileName);
             Scanner myReader = new Scanner(read);
             int counter = 1;
@@ -83,7 +95,7 @@ public class creditDebitMangement {
             setDebit(newDebit);
             myReader.close();
         } catch(FileNotFoundException e) {
-
+                System.out.println("File does not Exist!");
     }
 
 }
@@ -92,7 +104,12 @@ public class creditDebitMangement {
     public void setDebit(creditList newCard) {
         this.debit = newCard;
     }
-        @Override
+
+    public creditList getDebit() {
+        return debit;
+    }
+
+    @Override
         public String toString() {
             return "creditDebitMangement{" +
                     "debit=" + debit +
@@ -110,7 +127,7 @@ public class creditDebitMangement {
         double pay = 54.00;
 
         creditList test = new creditList();
-        creditDebitMangement test2 = new creditDebitMangement();
+        creditDebitMangement test2 = new creditDebitMangement(test);
         for (int i = 0 ; i < size ; i++ )
         {
             Card temp = new Card( cardNames[i], balances[i],aprs[i] );
