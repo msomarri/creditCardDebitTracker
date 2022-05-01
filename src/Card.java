@@ -68,8 +68,8 @@ public class Card {
     public double monthlyInterest(double princple , double interest){ return interest/100 * balance;}
     @Override
     public String toString() {
-        return  "Name : '" + name + '\n' +
+        return  "Name : " + name + '\n' +
                 "APR: " + apr + "\n" +
-                "Balance: " + balance + "\n";
+                "Balance: " + balance + "\n\n";
     }
 }

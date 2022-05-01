@@ -33,15 +33,18 @@ public class creditList {
         }
         return false;
     }
-    public void removeCard(String name){
+    public boolean removeCard(String name){
         for( int i = 0 ; i < ownersCards.size() ; i++) {
             Card curr_card = ownersCards.get(i);
             if(curr_card.getName() == name)
             {
                 ownersCards.remove(curr_card);
+                totalBalance -= curr_card.getBalance();
+                return true;
             }
-            totalBalance -= curr_card.getBalance();
+
         }
+        return false;
     }
     public int getCardIndex(String name){
         for ( int i =0 ; i < ownersCards.size();i++)
@@ -99,7 +102,7 @@ public class creditList {
         String ret = "";
         for ( int i = 0 ; i < ownersCards.size() ; i ++ )
         {
-                ret += ownersCards.get(i);
+                ret += (i+1)+":\n"+ownersCards.get(i);
         }
         return ret;
     }

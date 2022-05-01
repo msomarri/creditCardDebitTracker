@@ -18,29 +18,33 @@ public class cmlRun {
                     String userInputKey = userInput.nextLine();
                     switch ( userInputKey )
                     {
+                        //1:Manage Cards
                         case "1": {
-                            addNewCard();
+                            manageCard();
                             break;
                         }
+
+                        //2:Payment Impact"
                         case "2":{
-                            seeTotalBalance();
                             break;
                         }
+                        //3:Total Interest for the month
                         case "3":{
+                            totalInterestForTheMonth();
                             break;
                         }
+                        //4:Write to Fil
                         case "4":{
-                            totalInterestForTheMonth();
-                        }
-                        case "5":{
                             writeFile();
                             break;
                         }
-                        case "6":
+                        //5.Read File
+                        case "5":
                         {
                             readFile();
                             break;
                         }
+                        //7:Quit
                         case "7":
                         {
                         done = true;
@@ -55,15 +59,53 @@ public class cmlRun {
         userInput.close();
 
     }
+    
     public String menuItems()
     {
-        return "1: Add New Card +\n" +
-                "2: See total Balance\n" +
-                "3:Payment Impact\n" +
-                "4:Total Interest for the month\n" +
-                "5:Write to File\n" +
-                "6.Read File\n" +
+        return "1:Manage Cards\n" +
+                "2:Payment Impact\n" +
+                "3:Total Interest for the month\n" +
+                "4:Write to File\n" +
+                "5.Read File\n" +
                 "7:Quit\n";
+    }
+    public String manageCardMenu()
+    {
+        return "1:Add Card\n" +
+                "2:Remove Card\n" +
+                "3:View Cards\n" +
+                "4:Return to main menu";
+    }
+    public void manageCard(){
+        boolean done = false;
+        //Run untill we are done
+        while ( !done) {
+            printText("Manage your credit card stack here \n" +
+                    "Here is the Menu\n" +
+                    manageCardMenu());
+            String userInputKey = userInput.nextLine();
+            switch (userInputKey){
+                //1:Add Card
+                case "1":{
+                    addNewCard();
+                    break;
+                }
+                //2:Remove Card
+                case "2":{
+                    break;
+                }
+                //3:View Cards
+                case "3":{
+                    printText(""+ownersList);
+                    break;
+                }
+                //4:Return to main menu"
+                case "4":{
+                    done = true;
+                    return;
+                }
+            }
+        }
     }
     /** command line prompt for adding a new card **/
     public void addNewCard() {
@@ -124,7 +166,33 @@ public class cmlRun {
             printText("Please Enter a number");
         }
     }
+    public void removeCard()
+    {
+        String name = "";
+        boolean done = false;
 
+        while(!done)
+        {
+            printText("Please Enter the name of the card that u wan to delete. Hit . to go back");
+            name = userInput.nextLine();
+            if( name == ".")
+            {
+                done = true;
+            }
+            else {
+                if(ownersList.removeCard(name))
+                {
+                    printText("Card has been removed!");
+                    done = true;
+                    return;
+                }
+                else {
+                    printText("Card does not exist");
+                }
+            }
+        }
+
+    }
     public void seeTotalBalance(){
         //Add code to see the total balance
         printText("Here is your Total Balance So far  "+ ownersList.getTotalBalance());
