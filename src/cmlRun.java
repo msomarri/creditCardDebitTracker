@@ -6,6 +6,7 @@ public class cmlRun {
         app();
     }
     creditList ownersList = new creditList();
+    creditDebitMangement info = new creditDebitMangement();
     Scanner userInput = new Scanner(System.in);
     public void app(){
         boolean done = false;
@@ -26,6 +27,7 @@ public class cmlRun {
 
                         //2:Payment Impact"
                         case "2":{
+                            paymentImpactCML();
                             break;
                         }
                         //3:Total Interest for the month
@@ -76,6 +78,12 @@ public class cmlRun {
                 "3:View Cards\n" +
                 "4:Return to main menu";
     }
+    public String paymentImpactMenu() {
+        return "1:Make a payment and see impact\n" +
+                "2.Total Balance\n" +
+                "3.Highest Card Balance \n" +
+                "4.Highest Card Interest";
+    }
     public void manageCard(){
         boolean done = false;
         //Run untill we are done
@@ -106,6 +114,49 @@ public class cmlRun {
                 }
             }
         }
+    }
+
+//1:Make a payment and see impact\n" +
+//            "2.Total Balance\n" +
+//            "3.Highest Card Balance \n" +
+//            "4.Highest Card Interest";
+    //          5.done
+
+    public void paymentImpactCML(){
+        boolean done = false;
+        info.setDebit(ownersList);
+
+        while(!done)
+        {
+            printText("Welcome to the impact payment menu\n" +
+                    "Where can you see the difference that your payment makes \n" +
+                    "and determine what cards are bad.\n" +
+                    paymentImpactMenu());
+            String input = userInput.nextLine();
+            switch (input)
+            {
+                case "1":{
+                    break;
+                }
+                case "2":{
+                    printText(""+ownersList.getTotalBalance());
+                    break;
+                }
+                case "3":{
+                    printText(""+info.highestBalanceCard());
+                    break;
+                }
+                case "4":{
+                    printText(""+info.highInterestCard());
+                }
+                case "5":{
+                    done =true;
+                    return;
+                }
+            }
+        }
+
+
     }
     /** command line prompt for adding a new card **/
     public void addNewCard() {

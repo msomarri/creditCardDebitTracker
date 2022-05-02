@@ -6,7 +6,9 @@ import java.util.Scanner;
 
 public class creditDebitMangement {
     private creditList debit ;
-
+    public  creditDebitMangement(){
+        this.debit = new creditList();
+    }
     public  creditDebitMangement(creditList debt){
         this.debit = debt;
     }
@@ -27,7 +29,42 @@ public class creditDebitMangement {
 
         return months;
     }
+    //Finds the card that has the highest interest
+    public Card highInterestCard(){
+        Card ret = null;
+        double max = 0;
 
+        for ( int i = 0 ; i < debit.size() ; i++)
+        {
+//                double balance = debit.getCard(i).getBalance();
+                double interest = debit.getCard(i).monthlyInterest();
+//                double total = balance+interest;
+                if( interest > max){
+                    ret = debit.getCard(i);
+                    max=interest;
+                }
+
+        }
+        return ret;
+    }
+    //Find the card with the highest balance
+    public Card highestBalanceCard(){
+        Card ret = null;
+        double max = 0;
+
+        for ( int i = 0 ; i < debit.size() ; i++)
+        {
+                double balance = debit.getCard(i).getBalance();
+//            double interest = debit.getCard(i).monthlyInterest();
+//                double total = balance+interest;
+            if( balance > max){
+                ret = debit.getCard(i);
+                max=balance;
+            }
+
+        }
+        return ret;
+    }
     // Returns the total amount of interest for all the cards toegther
     public double totalInterest(){
         double ret = 0;
