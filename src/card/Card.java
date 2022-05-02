@@ -1,3 +1,5 @@
+package card;
+
 /**
     @name The Credit Card name. This name Should be unquie and serves as an id for the card
     @apr The annual percentage rate for the card

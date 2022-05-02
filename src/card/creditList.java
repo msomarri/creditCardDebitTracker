@@ -1,3 +1,5 @@
+package card;
+
 import java.util.ArrayList;
 /** Credit management will the brains behind tracking down the total expense that a user has and show that to the user
      TODO add sorting for the arraylist

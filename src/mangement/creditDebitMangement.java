@@ -1,8 +1,11 @@
+package mangement;
+
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.FileWriter;
 import java.util.Scanner;
+import card.*;
 
 public class creditDebitMangement {
     private creditList debit ;
