@@ -3,7 +3,7 @@ package cml;
 import java.util.Scanner;
 import card.Card;
 import  card.creditList;
-import mangement.creditDebitMangement;
+import mangement.creditDebitManagement;
 
 public class cmlRun {
 
@@ -11,7 +11,7 @@ public class cmlRun {
         app();
     }
     creditList ownersList = new creditList();
-    creditDebitMangement info = new creditDebitMangement();
+    creditDebitManagement info = new creditDebitManagement();
     Scanner userInput = new Scanner(System.in);
     public void app(){
         boolean done = false;
@@ -26,7 +26,8 @@ public class cmlRun {
                     {
                         //1:Manage Cards
                         case "1": {
-                            manageCard();
+                            cmlCRUD manageMenu = new cmlCRUD(ownersList);
+                            ownersList = manageMenu.menu();
                             break;
                         }
 
@@ -76,50 +77,14 @@ public class cmlRun {
                 "5.Read File\n" +
                 "7:Quit\n";
     }
-    public String manageCardMenu()
-    {
-        return "1:Add Card\n" +
-                "2:Remove Card\n" +
-                "3:View Cards\n" +
-                "4:Return to main menu";
-    }
+
     public String paymentImpactMenu() {
         return "1:Make a payment and see impact\n" +
                 "2.Total Balance\n" +
                 "3.Highest Card Balance \n" +
                 "4.Highest Card Interest";
     }
-    public void manageCard(){
-        boolean done = false;
-        //Run untill we are done
-        while ( !done) {
-            printText("Manage your credit card stack here \n" +
-                    "Here is the Menu\n" +
-                    manageCardMenu());
-            String userInputKey = userInput.nextLine();
-            switch (userInputKey){
-                //1:Add Card
-                case "1":{
-                    addNewCard();
-                    break;
-                }
-                //2:Remove Card
-                case "2":{
-                    break;
-                }
-                //3:View Cards
-                case "3":{
-                    printText(""+ownersList);
-                    break;
-                }
-                //4:Return to main menu"
-                case "4":{
-                    done = true;
-                    return;
-                }
-            }
-        }
-    }
+
 
 //1:Make a payment and see impact\n" +
 //            "2.Total Balance\n" +
@@ -163,92 +128,7 @@ public class cmlRun {
 
 
     }
-    /** command line prompt for adding a new card **/
-    public void addNewCard() {
-        //Add code to make menu item 1
-        String name = "";
-        double balance = 0;
-        double apr = 0;
 
-        String answer ="";
-
-        boolean done = false;
-        boolean addName = false;
-        boolean addBalance = false;
-        boolean addAPR = false;
-
-
-        try {
-            while (!done) {
-                //Add the name to the card
-                if(!addName) {
-                    printText("Enter the Name of the Card");
-                    answer = userInput.nextLine();
-                    if (!confirm(answer)) {
-                        continue;
-                    }
-                    name = answer;
-                    addName = true;
-                }
-                // Add the Balance
-                if(!addBalance) {
-                    printText("Enter the Balance ");
-                    answer = userInput.nextLine();
-                    if (!confirm("" + answer)) {
-                        continue;
-                    }
-                    balance = Double.parseDouble(answer);
-                    addBalance = true;
-                }
-                // Add the APR of the card
-                if(!addAPR) {
-                    printText("Enter the APR ");
-                    answer = userInput.nextLine();
-
-                    if (!confirm("" + answer)) {
-                        continue;
-                    }
-                    apr = Double.parseDouble(answer);
-                    addAPR = true;
-                }
-                done = true;
-            }
-            Card newCard = new Card(name,balance,apr);
-            ownersList.addNewCard(newCard);
-            printText(" Card: "+newCard);
-            printText("Has been added");
-        }catch (Exception e )
-        {
-            printText("Please Enter a number");
-        }
-    }
-    public void removeCard()
-    {
-        String name = "";
-        boolean done = false;
-
-        while(!done)
-        {
-            printText("Please Enter the name of the card that u wan to delete. Hit . to go back");
-            name = userInput.nextLine();
-            if( name == ".")
-            {
-                done = true;
-            }
-            else {
-                if(ownersList.removeCard(name))
-                {
-                    printText("Card has been removed!");
-                    done = true;
-                    return;
-                }
-                else {
-                    printText("Card does not exist");
-                }
-            }
-        }
-
-    }
     public void seeTotalBalance(){
         //Add code to see the total balance
         printText("Here is your Total Balance So far  "+ ownersList.getTotalBalance());
@@ -258,20 +138,20 @@ public class cmlRun {
     }
     public void totalInterestForTheMonth(){
         //Add code to show what the total interest is for the month
-        creditDebitMangement ret = new creditDebitMangement(ownersList);
+        creditDebitManagement ret = new creditDebitManagement(ownersList);
         printText(""+ ret.totalInterest() ) ;
     }
     public void writeFile(){
         printText("Please enter the File/Filepath ");
         String FilePath = userInput.nextLine();
-        creditDebitMangement ret = new creditDebitMangement(ownersList);
+        creditDebitManagement ret = new creditDebitManagement(ownersList);
         ret.writeToText(FilePath);
         printText("File has been created");
     }
     public void readFile(){
         printText("Please enter the File/Filepath ");
         String Filepath = userInput.nextLine();
-        creditDebitMangement ret = new creditDebitMangement(ownersList);
+        creditDebitManagement ret = new creditDebitManagement(ownersList);
         ret.readFile(Filepath);
         ownersList = ret.getDebit();
         printText("File has been Read");

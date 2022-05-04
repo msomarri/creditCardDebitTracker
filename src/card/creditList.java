@@ -38,7 +38,7 @@ public class creditList {
     public boolean removeCard(String name){
         for( int i = 0 ; i < ownersCards.size() ; i++) {
             Card curr_card = ownersCards.get(i);
-            if(curr_card.getName() == name)
+            if(curr_card.getName().trim().equals(name.trim()))
             {
                 ownersCards.remove(curr_card);
                 totalBalance -= curr_card.getBalance();

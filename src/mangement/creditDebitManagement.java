@@ -7,12 +7,12 @@ import java.io.FileWriter;
 import java.util.Scanner;
 import card.*;
 
-public class creditDebitMangement {
+public class creditDebitManagement {
     private creditList debit ;
-    public  creditDebitMangement(){
+    public creditDebitManagement(){
         this.debit = new creditList();
     }
-    public  creditDebitMangement(creditList debt){
+    public creditDebitManagement(creditList debt){
         this.debit = debt;
     }
 
