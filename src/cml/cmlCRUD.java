@@ -9,8 +9,9 @@ import java.util.Scanner;
  *  update a crad
  *  delete a card**/
 public class cmlCRUD {
-    Scanner userInput = new Scanner(System.in);
-    creditList ownersList = new creditList();
+    private final Scanner usersEdits = new Scanner(System.in);
+    private creditList ownersList;
+    private cmlTools format  = new cmlTools();
     public cmlCRUD(){
         this.ownersList = null;
     }
@@ -22,10 +23,10 @@ public class cmlCRUD {
         boolean done = false;
         //Run until we are done
         while ( !done) {
-            printText("Manage your credit card stack here \n" +
+            format.printText("Manage your credit card stack here \n" +
                     "Here is the Menu\n" +
                     manageCardMenu());
-            String userInputKey = userInput.nextLine();
+            String userInputKey = usersEdits.nextLine();
             switch (userInputKey){
                 //1:Add Card
                 case "1":{
@@ -39,7 +40,7 @@ public class cmlCRUD {
                 }
                 //3:View Cards
                 case "3":{
-                    printText(""+ownersList);
+                    format.printText(""+ownersList);
                     break;
                 }
                 //4:update Card
@@ -71,7 +72,7 @@ public class cmlCRUD {
         double balance = 0;
         double apr = 0;
 
-        String answer ="";
+        String answer;
 
         boolean done = false;
         boolean addName = false;
@@ -83,9 +84,9 @@ public class cmlCRUD {
             while (!done) {
                 //Add the name to the card
                 if(!addName) {
-                    printText("Enter the Name of the Card");
-                    answer = userInput.nextLine();
-                    if (!confirm(answer)) {
+                    format.printText("Enter the Name of the Card");
+                    answer = usersEdits.nextLine();
+                    if (!format.confirm(answer)) {
                         continue;
                     }
                     name = answer;
@@ -93,9 +94,9 @@ public class cmlCRUD {
                 }
                 // Add the Balance
                 if(!addBalance) {
-                    printText("Enter the Balance ");
-                    answer = userInput.nextLine();
-                    if (!confirm("" + answer)) {
+                    format.printText("Enter the Balance ");
+                    answer = usersEdits.nextLine();
+                    if (!format.confirm("" + answer)) {
                         continue;
                     }
                     balance = Double.parseDouble(answer);
@@ -103,10 +104,10 @@ public class cmlCRUD {
                 }
                 // Add the APR of the card
                 if(!addAPR) {
-                    printText("Enter the APR ");
-                    answer = userInput.nextLine();
+                    format.printText("Enter the APR ");
+                    answer = usersEdits.nextLine();
 
-                    if (!confirm("" + answer)) {
+                    if (!format.confirm("" + answer)) {
                         continue;
                     }
                     apr = Double.parseDouble(answer);
@@ -116,15 +117,15 @@ public class cmlCRUD {
             }
             Card newCard = new Card(name,balance,apr);
             ownersList.addNewCard(newCard);
-            printText(" Card: "+newCard);
-            printText("Has been added");
+            format.printText(" Card: "+newCard);
+            format.printText("Has been added");
         }catch (Exception e )
         {
-            printText("Please Enter a number");
+            format.printText("Please Enter a number");
         }
     }
 
-
+    //Delete and remove a card
     private void removeCard()
     {
         String name = "";
@@ -132,45 +133,28 @@ public class cmlCRUD {
 
         while(!done)
         {
-            printText("Please Enter the name of the card that u want to delete. Hit . to go back");
-            name = userInput.nextLine();
+            format.printText("Please Enter the name of the card that u want to delete. Hit . to go back");
+            name = usersEdits.nextLine();
             if( name == ".")
             {
                 done = true;
             }
             else {
-                if(confirm(name)) {
+                if(format.confirm(name)) {
                     if (ownersList.removeCard(name)) {
-                        printText("Card has been removed!");
+                        format.printText("Card has been removed!");
                         done = true;
                     }
                     else {
-                        printText("Card does not exist");
+                        format.printText("Card does not exist");
                     }
                 }
-               printText("Try again");
+               format.printText("Try again");
             }
         }
 
     }
-    public boolean confirm(String info){
-        boolean done = false;
-        while(!done) {
-            printText(info + " is this correct? Y for YES and N for NO");
-            String input = userInput.nextLine();
-            if (input.equalsIgnoreCase("Y")) {
-                return true;
-            } else if ( input.equalsIgnoreCase("N")){
-                return false;
-            }
-            printText("Please Enter a Y or N");
-        }
-        return false;
-    }
-    public void printText(String txt)
-    {
-        System.out.println(txt);
-    }
+
 
 
 }

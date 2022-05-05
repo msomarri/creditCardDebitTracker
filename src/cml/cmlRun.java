@@ -5,6 +5,7 @@ import card.Card;
 import  card.creditList;
 import mangement.creditDebitManagement;
 
+
 public class cmlRun {
 
     public cmlRun(){
@@ -13,6 +14,7 @@ public class cmlRun {
     creditList ownersList = new creditList();
     creditDebitManagement info = new creditDebitManagement();
     Scanner userInput = new Scanner(System.in);
+    private cmlTools format  = new cmlTools();
     public void app(){
         boolean done = false;
         //Run untill we are done
