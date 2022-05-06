@@ -74,6 +74,18 @@ public class creditList {
         }
         return null;
     }
+    public int indexOf(String name){
+        int ret = -1;
+        for ( int i =0 ; i < ownersCards.size();i++)
+        {
+            if ( ownersCards.get(i).getName().equals(name))
+            {
+                ret = i;
+            }
+
+        }
+        return ret;
+    }
     public boolean updateCard(String name , double balance)
     {
         for ( int i =0 ; i < ownersCards.size();i++)
@@ -85,6 +97,19 @@ public class creditList {
             }
 
         }
+        return false;
+
+    }
+    public boolean updateCard(String name , Card  newC)
+    {
+
+        int pos  = indexOf(name);
+        if(pos != -1 )
+        {
+            ownersCards.set(pos,newC);
+            return true;
+        }
+
         return false;
 
     }

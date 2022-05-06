@@ -51,7 +51,7 @@ public class cmlPaymentImpact {
         return "1:Make a payment and see impact\n" +
                 "2.Total Balance\n" +
                 "3.Highest Card Balance \n" +
-                "4.Highest Card Interest" +
+                "4.Highest Card Interest\n" +
                 "5. Exit to Main menu";
     }
 }

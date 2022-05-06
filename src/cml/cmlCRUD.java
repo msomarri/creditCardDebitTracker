@@ -155,7 +155,7 @@ public class cmlCRUD {
         }
 
     }
-
+    // View Card
     public String viewList(){
         String ret = format.linebar();
         for ( int i = 0 ; i < ownersList.size() ; i ++)
@@ -163,6 +163,10 @@ public class cmlCRUD {
             ret += "\n"+ownersList.getCard(i) +"Interest:  "+ ownersList.getCard(i).monthlyInterest()+format.sep();
         }
         return ret+format.linebar();
+    }
+    // Update cards based off there names
+    public void updateCard(String name){
+            Card temp = ownersList.getCard(name);
     }
 
 }
