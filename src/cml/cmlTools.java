@@ -26,8 +26,17 @@ public class cmlTools {
         Input.close();
         return false;
     }
+    public String bar(){
+        return "\n*********************************************************************************\n";
+    }
+    public String linebar(){
+        return "\n----------------------------------------------------------\n";
+    }
+    public String sep(){
+        return "\n~~~~~~~~~~~~~~~~~~\n";
+    }
     public void printText(String txt)
     {
-        System.out.println(txt);
+        System.out.println( bar() +txt +bar()) ;
     }
 }

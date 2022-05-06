@@ -40,7 +40,7 @@ public class cmlCRUD {
                 }
                 //3:View Cards
                 case "3":{
-                    format.printText(""+ownersList);
+                    System.out.println(viewList());
                     break;
                 }
                 //4:update Card
@@ -61,7 +61,8 @@ public class cmlCRUD {
         return "1:Add Card\n" +
                 "2:Remove Card\n" +
                 "3:View Cards\n" +
-                "4:Return to main menu";
+                "4.Update Card\n" +
+                "5:Return to main menu\n";
     }
 
 
@@ -155,6 +156,13 @@ public class cmlCRUD {
 
     }
 
-
+    public String viewList(){
+        String ret = format.linebar();
+        for ( int i = 0 ; i < ownersList.size() ; i ++)
+        {
+            ret += "\n"+ownersList.getCard(i) +"Interest:  "+ ownersList.getCard(i).monthlyInterest()+format.sep();
+        }
+        return ret+format.linebar();
+    }
 
 }
