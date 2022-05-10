@@ -23,7 +23,7 @@ public class cmlRun {
             printText( "Welcome to the Credit Card Tracker App \n" +
                     "Here is the Menu\n" +
                     menuItems() );
-                    String userInputKey = userInput.nextLine();
+                    String userInputKey = format.readinput();
                     switch ( userInputKey )
                     {
                         //1:Manage Cards
@@ -36,7 +36,7 @@ public class cmlRun {
                         //2:Payment Impact"
                         case "2":{
                             cmlPaymentImpact pay = new cmlPaymentImpact();
-                            pay.paymentImpactCML(ownersList, userInput);
+                            pay.paymentImpactCML(ownersList);
                             break;
                         }
                         //3:Total Interest for the month

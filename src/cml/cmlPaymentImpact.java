@@ -10,7 +10,7 @@ public class cmlPaymentImpact {
     private cmlTools format = new cmlTools();
     creditDebitManagement info = new creditDebitManagement();
 
-    public void paymentImpactCML(creditList ownersList , Scanner userInput){
+    public void paymentImpactCML(creditList ownersList){
         boolean done = false;
         info.setDebit(ownersList);
 
@@ -21,7 +21,7 @@ public class cmlPaymentImpact {
                     "Where can you see the difference that your payment makes \n" +
                     "and determine what cards are bad.\n" +
                     paymentImpactMenu());
-            String input = userInput.nextLine();
+            String input = format.readinput();
             switch (input)
             {
                 case "1":{

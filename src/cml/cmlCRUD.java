@@ -125,7 +125,23 @@ public class cmlCRUD {
             format.printText("Please Enter a number");
         }
     }
+    // Prompts the user with a menu to update their card information
+    public void updateCard(){
+        String name ;
+        boolean done = false;
 
+        while(!done){
+        //name
+            format.printText(" Did you want to change the Name of the card?\n Y for yes and N for No");
+            if( usersEdits.nextLine().equalsIgnoreCase("y"))
+            {
+
+            }
+        //balance
+        //interest
+
+        }
+    }
     //Delete and remove a card
     private void removeCard()
     {
