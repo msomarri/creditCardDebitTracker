@@ -25,7 +25,7 @@ public class cmlTools {
       return -1;
     }
     // Return userinput as a string
-    public String readinput()
+    public String readInput()
     {
         return usersInput.nextLine();
     }
