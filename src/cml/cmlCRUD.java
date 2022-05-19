@@ -3,18 +3,14 @@ package cml;
 import card.Card;
 import card.creditList;
 
-import java.util.Scanner;
 /** Handles the operations for creating new cards
  *  reading/viewing the cards
  *  update a crad
  *  delete a card**/
 public class cmlCRUD {
-    private final Scanner usersEdits = new Scanner(System.in);
     private creditList ownersList;
     private cmlTools format  = new cmlTools();
-    public cmlCRUD(){
-        this.ownersList = null;
-    }
+
     public cmlCRUD(creditList list){
         this.ownersList = list;
     }
@@ -26,7 +22,7 @@ public class cmlCRUD {
             format.printText("Manage your credit card stack here \n" +
                     "Here is the Menu\n" +
                     manageCardMenu());
-            String userInputKey = usersEdits.nextLine();
+            String userInputKey = format.readInput();
             switch (userInputKey){
                 //1:Add Card
                 case "1":{
@@ -45,6 +41,7 @@ public class cmlCRUD {
                 }
                 //4:update Card
                 case "4":{
+                    updateCard();
                     break;
                 }
                 //5:Return to main menu"
@@ -69,90 +66,54 @@ public class cmlCRUD {
     /** command line prompt for Creating and adding a new card **/
     private void addNewCard() {
         //Add code to make menu item 1
-        String name = "";
-        double balance = 0;
-        double apr = 0;
+        String name ;
+        double balance;
+        double apr;
 
-        String answer;
-
-        boolean done = false;
-        boolean addName = false;
-        boolean addBalance = false;
-        boolean addAPR = false;
-
-
-        try {
-            while (!done) {
                 //Add the name to the card
-                if(!addName) {
-                    format.printText("Enter the Name of the Card");
-                    answer = usersEdits.nextLine();
-                    if (!format.confirm(answer)) {
-                        continue;
-                    }
-                    name = answer;
-                    addName = true;
-                }
+                name = collectName();
                 // Add the Balance
-                if(!addBalance) {
-                    format.printText("Enter the Balance ");
-                    answer = usersEdits.nextLine();
-                    if (!format.confirm("" + answer)) {
-                        continue;
-                    }
-                    balance = Double.parseDouble(answer);
-                    addBalance = true;
-                }
+                balance = collectDouble("balance");
                 // Add the APR of the card
-                if(!addAPR) {
-                    format.printText("Enter the APR ");
-                    answer = usersEdits.nextLine();
+                apr = collectDouble("APR");
 
-                    if (!format.confirm("" + answer)) {
-                        continue;
-                    }
-                    apr = Double.parseDouble(answer);
-                    addAPR = true;
-                }
-                done = true;
-            }
+
             Card newCard = new Card(name,balance,apr);
             ownersList.addNewCard(newCard);
             format.printText(" Card: "+newCard);
             format.printText("Has been added");
-        }catch (Exception e )
-        {
-            format.printText("Please Enter a number");
-        }
     }
     // Prompts the user with a menu to update their card information
     public void updateCard(){
-        String name ;
-        boolean done = false;
+        String name;
+        double balance;
+        double apr;
 
-        while(!done){
-        //name
-            format.printText(" Did you want to change the Name of the card?\n Y for yes and N for No");
-            if( usersEdits.nextLine().equalsIgnoreCase("y"))
-            {
+        viewList();
+        String target = format.askInput("Please enter the name of the card that you want to change?");
 
-            }
-        //balance
-        //interest
+        //Add the name to the card
+        name = collectName();
+        // Add the Balance
+        balance = collectDouble("balance");
+        // Add the APR of the card
+        apr = collectDouble("APR");
 
+        format.printText("Changing card with Name with "+ target);
+        ownersList.updateCard(target, new Card(name,balance,apr));
         }
-    }
+
     //Delete and remove a card
     private void removeCard()
     {
-        String name = "";
+        String name;
         boolean done = false;
 
         while(!done)
         {
             format.printText("Please Enter the name of the card that u want to delete. Hit . to go back");
-            name = usersEdits.nextLine();
-            if( name == ".")
+            name = format.readInput();
+            if( name.equals("."))
             {
                 done = true;
             }
@@ -172,6 +133,7 @@ public class cmlCRUD {
 
     }
     // View Card
+    /// Possble to update with Array.Maps require more research
     public String viewList(){
         String ret = format.linebar();
         for ( int i = 0 ; i < ownersList.size() ; i ++)
@@ -180,9 +142,31 @@ public class cmlCRUD {
         }
         return ret+format.linebar();
     }
-    // Update cards based off there names
-    public void updateCard(String name){
-            Card temp = ownersList.getCard(name);
+//Helper functions to collect information from the user
+    public String collectName() {
+        boolean done = false;
+        String name="";
+
+        while(!done) {
+            format.printText("Enter the Name of the Card");
+            name = format.readInput();
+            if (format.confirm(name)) {
+                done = true;
+            }
+        }
+        return name;
     }
+    //Since the balance and double are both doubles. we can use this to collect both of them
+    public double collectDouble(String type){
+    boolean done = false;
+    double ret=-1;
+        while(!done) {
+            ret = format.askDoubleValue(type);
+            if (format.confirm("" + ret)) {
+                done = true;
+            }
+        }
+        return ret;
+        }
 
 }

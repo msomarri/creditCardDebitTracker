@@ -3,9 +3,6 @@ package cml;
 import mangement.creditDebitManagement;
 import card.*;
 
-import javax.security.auth.login.CredentialException;
-import java.util.Scanner;
-
 public class cmlPaymentImpact {
     private cmlTools format = new cmlTools();
     creditDebitManagement info = new creditDebitManagement();
@@ -21,7 +18,7 @@ public class cmlPaymentImpact {
                     "Where can you see the difference that your payment makes \n" +
                     "and determine what cards are bad.\n" +
                     paymentImpactMenu());
-            String input = format.readinput();
+            String input = format.readInput();
             switch (input)
             {
                 case "1":{

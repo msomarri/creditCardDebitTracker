@@ -1,7 +1,7 @@
 package cml;
 
 import java.util.Scanner;
-import card.Card;
+
 import  card.creditList;
 import mangement.creditDebitManagement;
 
@@ -23,7 +23,7 @@ public class cmlRun {
             printText( "Welcome to the Credit Card Tracker App \n" +
                     "Here is the Menu\n" +
                     menuItems() );
-                    String userInputKey = format.readinput();
+                    String userInputKey = format.readInput();
                     switch ( userInputKey )
                     {
                         //1:Manage Cards
