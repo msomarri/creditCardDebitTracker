@@ -54,4 +54,7 @@ public class cmlPaymentImpact {
                 "4.Highest Card Interest\n" +
                 "5. Exit to Main menu";
     }
+    public void seeImpact(){
+
+    }
 }

@@ -32,6 +32,15 @@ public class creditDebitManagement {
 
         return months;
     }
+    // How much interst will u save with a payment
+    public double interestSaved(String name, double payment){
+        Card myCard = debit.getCard(name);
+        double balance = myCard.getBalance();
+        balance -= payment;
+        myCard.setBalance(balance);
+
+        return myCard.monthlyInterest();
+    }
     //Finds the card that has the highest interest
     public Card highInterestCard(){
         Card ret = null;
